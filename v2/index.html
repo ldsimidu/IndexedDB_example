@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos</title>
+</head>
+<body>
+  <h1>Lista de Produtos</h1>
+  <div id="produtos"></div>
+
+  <script>
+    // URL do JSON hospedado
+    const url = 'https://seu-usuario.github.io/seu-repositorio/dados.json';
+
+    // Carregar e exibir dados
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const produtosDiv = document.getElementById('produtos');
+        data.forEach(produto => {
+          const produtoElement = document.createElement('div');
+          produtoElement.innerHTML = `
+            <h2>${produto.nome}</h2>
+            <p>${produto.descricao}</p>
+            <p>Preço: R$ ${produto.preco}</p>
+          `;
+          produtosDiv.appendChild(produtoElement);
+        });
+      })
+      .catch(error => console.error('Erro ao carregar os dados:', error));
+  </script>
+</body>
+</html>
